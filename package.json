@@ -1,0 +1,22 @@
+{
+  "name": "age_calc",
+  "version": "1.0.0",
+  "description": "年龄、生肖计算器",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dongxifan/age_calc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dongxifan/age_calc/issues"
+  },
+  "homepage": "https://github.com/dongxifan/age_calc#readme",
+  "dependencies": {
+    "@vant/weapp": "^1.10.14"
+  }
+}
