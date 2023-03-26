@@ -1,0 +1,44 @@
+/* pages/result/result.wxss */
+.van-field__label {
+text-align: center;
+}
+.input-age1 .van-field__control,.input-age2 .van-field__control {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: red !important;
+}
+
+.input-age2 .van-field__control{
+  color: rgb(209, 136, 41) !important;
+}
+
+.input-age2 {
+  font-size: 24rpx;
+}
+
+.input-belong {
+  font-size: 24rpx;
+}
+
+.input-constellation {
+  font-size: 24rpx;
+}
+
+.input-survivalDays {
+  font-size: 24rpx;
+}
+
+.input-survivalDays {
+  font-size: 24rpx;
+}
+
+ .back-btn { 
+  width: 500rpx;
+  margin: 0 auto;
+  margin-top: 10vh;
+  text-align: center;
+  display: block;
+}
+.van-button--large {
+  height: 80rpx !important;
+}

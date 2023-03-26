@@ -1,6 +1,8 @@
 // app.js
+import dayjs from 'dayjs'
 App({
-  onLaunch() {
+  onLaunch() { 
+    console.log('-----');
     // 展示本地存储能力
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -14,6 +16,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
-  }
+    userInfo: null,
+  },
+  $dayjs: dayjs
 })

@@ -1,45 +1,61 @@
+const app = getApp();
+console.log(app);
 
-// pages/home/home.js
-const date = new Date()
-const years = []
-const months = []
-const days = []
-
-for (let i = 1900; i <= date.getFullYear(); i++) {
-  years.push(i)
-}
-
-for (let i = 1; i <= 12; i++) {
-  months.push(i)
-}
-
-for (let i = 1; i <= 31; i++) {
-  days.push(i)
-}
 Page({
-
-  /**
-   * 页面的初始数据
-   */
+  // options: {
+  //   styleIsolation: 'shared',
+  // },
   data: {
-    calcDate: '1996-12-25',
+    styleIsolation: 'shared',
     showDatePanel: false,
-    years,
-    year: date.getFullYear(),
-    months,
-    month: date.getMonth() + 1,
-    days,
-    day: date.getDate() ,
-    value: [9999, 1, 1],
     isDaytime: true,
+    currentDateText: app.$dayjs(new Date()).format('YYYY-MM-DD'),
+    currentDate: new Date().getTime(),
+    minDate: new Date(1912).getTime(),
+    maxDate: new Date().getTime(),
+    
+    formatter(type, value) {
+      if (type === 'year') {
+        return `${value}年`;
+      }
+      if (type === 'month') {
+        return `${value}月`;
+      }
+      return value;
+    },
   },
-  bindChange:function() {
-    const val = e.detail.value
+  confirmDate(event) {
+    this.closeDate()
     this.setData({
-      year: this.data.years[val[0]],
-      month: this.data.months[val[1]],
-      day: this.data.days[val[2]],
-      isDaytime: !val[3]
+      currentDate: event.detail,
+    });
+    this.setData({
+      currentDateText: app.$dayjs(event.detail).format('YYYY-MM-DD'),
+    });
+  },
+  cancelDate(event) {
+    this.closeDate()
+  },
+  showResult(event) {
+    const _this = this
+    wx.navigateTo({
+      url: `../result/result`,
+      // events: {
+      // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+      // acceptDataFromOpenedPage: function(data) {
+      //   console.log(data)
+      // },
+      // someEvent: function(data) {
+      //   console.log(data)
+      // }
+      // },
+      success: function (res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', {
+          currentDate: _this.data.currentDateText,
+          time: _this.data.currentDate
+        })
+      }
     })
   },
 
@@ -64,13 +80,17 @@ Page({
 
   },
   // 弹出日期选择框
-  showDate: function(){
+  showDate: function () {
     console.log('------');
-    this.setData({showDatePanel : true})
+    this.setData({
+      showDatePanel: true
+    })
   },
   // 关闭日期选择框
-  closeDate: function(){
-    this.showDatePanel = false
+  closeDate: function () {
+    this.setData({
+      showDatePanel: false
+    })
   },
 
   /**
@@ -108,3 +128,9 @@ Page({
 
   }
 })
+
+// Component({
+//   options: {
+//     styleIsolation: 'shared',
+//   },
+// });

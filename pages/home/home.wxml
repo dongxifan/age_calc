@@ -1,17 +1,8 @@
 <view class="content">
   <view class="bg"></view>
-  <view class="date">{{calcDate}}</view>
-  <van-button type="primary" class="start-btn"  bindtap="showDate">年龄计算</van-button>
-  <picker-view wx:if="{{showDatePanel}}" indicator-style="height: 50px;" class="date-panel" style="width: 100%; height: 300px;"
-    value="{{value}}" bindchange="bindChange">
-    <picker-view-column>
-        <view wx:for="{{years}}" wx:key="{{years}}" style="line-height: 50px; text-align: center;">{{item}}年</view>
-      </picker-view-column>
-      <picker-view-column>
-        <view wx:for="{{months}}" wx:key="{{months}}" style="line-height: 50px; text-align: center;">{{item}}月</view>
-      </picker-view-column>
-      <picker-view-column>
-        <view wx:for="{{days}}" wx:key="{{days}}" style="line-height: 50px; text-align: center;">{{item}}日</view>
-      </picker-view-column>
-  </picker-view>
+  <view class="date" bindtap="showDate">{{currentDateText}}</view>
+  <van-button type="primary" block class="start-btn" size="large" bindtap="showResult">年龄计算</van-button>
+  <van-popup show="{{ showDatePanel }}" round position="bottom"  custom-style="height: 50%;" bind:close="closeDate">
+    <van-datetime-picker type="date" value="{{ currentDate }}"  min-date="{{ minDate }}" max-date="{{ maxDate }}" formatter="{{ formatter }}" bind:cancel="cancelDate" bind:confirm="confirmDate"/>
+  </van-popup> 
 </view>

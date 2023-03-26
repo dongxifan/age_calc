@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/dongxifan/age_calc#readme",
   "dependencies": {
-    "@vant/weapp": "^1.10.14"
+    "@vant/weapp": "^1.10.14",
+    "dayjs": "^1.11.7"
   }
 }
