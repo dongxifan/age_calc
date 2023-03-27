@@ -1,11 +1,12 @@
 <view class="info">
   <van-cell-group>
-    <van-field value="{{age1}}" label="周岁" readonly class="input-age1" custom-style="color:red"/>
-    <van-field value="{{age2}}" label="虚岁" readonly class="input-age2" />
+    <van-field value="{{age1}}   (每过一个生日就长一岁)" label="周岁" readonly class="input-age1" custom-style="color:red"/>
+    <van-field value="{{age2}}   (出生时为1岁，每过一个春节长1岁)" label="虚岁" readonly class="input-age2" />
     <van-field value="{{belong}}" label="生肖" readonly class="input-belong" />
     <van-field value="{{constellation}}" label="星座" readonly class="input-constellation" />
     <van-field value="已存在{{survivalDays}}天" label="天数" readonly class="input-survivalDays" />
-    <van-field value="{{nextDesc}}" label="下次生日" readonly class="input-survivalDays" />
+    <van-field value="{{nongDays}}" label="农历生日" readonly class="input-nongDays" />
+    <van-field value="{{nextDesc}}" label="下次阳历生日" readonly class="input-survivalDays" />
   </van-cell-group>
   <van-button type="primary" block class="back-btn" size="large" bindtap="backHome">返回</van-button>
 

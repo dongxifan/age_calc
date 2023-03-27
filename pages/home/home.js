@@ -1,19 +1,49 @@
 const app = getApp();
 console.log(app);
+const date = new Date()
+const years = []
+const months = []
+const days = []
+const year = app.$dayjs().year()
+const month = app.$dayjs().month() 
+const day = app.$dayjs().date()
+for (let i = 1912; i <= date.getFullYear(); i++) {
+  years.push(i)
+}
+for (let i = 1; i <= 12; i++) {
+  months.push(i)
+}
+for (let i = 1; i <= 31; i++) {
+  days.push(i)
+}
 
 Page({
   // options: {
   //   styleIsolation: 'shared',
   // },
-  data: {
+  onShareAppMessage() {
+    return {
+      title: 'picker-view',
+      path: 'page/component/pages/picker-view/picker-view'
+    }
+  },
+  data: { 
+    years,
+    year,
+    months,
+    month,
+    days,
+    day,
+    value: [9999, month, day - 1],
+    isDaytime: true,
+
+
     styleIsolation: 'shared',
     showDatePanel: false,
     isDaytime: true,
     currentDateText: app.$dayjs(new Date()).format('YYYY-MM-DD'),
-    currentDate: new Date().getTime(),
     minDate: new Date(1912).getTime(),
     maxDate: new Date().getTime(),
-    
     formatter(type, value) {
       if (type === 'year') {
         return `${value}年`;
@@ -24,13 +54,24 @@ Page({
       return value;
     },
   },
-  confirmDate(event) {
-    this.closeDate()
+  bindChange(e) {
+    const val = e.detail.value
     this.setData({
-      currentDate: event.detail,
-    });
+      year: this.data.years[val[0]],
+      month: this.data.months[val[1]],
+      day: this.data.days[val[2]],
+      isDaytime: !val[3]
+    })
+  },
+  confirmDate() {
+    const {year,month,day} = this.data
+    console.log(year);
+    console.log(month);
+    console.log(day);
+    console.log(this.data.value);
+    this.closeDate()  
     this.setData({
-      currentDateText: app.$dayjs(event.detail).format('YYYY-MM-DD'),
+      currentDateText:  `${year}-${month}-${day}`
     });
   },
   cancelDate(event) {
@@ -53,7 +94,6 @@ Page({
         // 通过eventChannel向被打开页面传送数据
         res.eventChannel.emit('acceptDataFromOpenerPage', {
           currentDate: _this.data.currentDateText,
-          time: _this.data.currentDate
         })
       }
     })

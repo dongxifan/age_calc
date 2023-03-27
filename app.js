@@ -1,5 +1,8 @@
 // app.js
 import dayjs from 'dayjs'
+// import 'js-calendar-converter'
+// console.log(calendar);
+// console.log(window);
 App({
   onLaunch() { 
     console.log('-----');
@@ -18,5 +21,6 @@ App({
   globalData: {
     userInfo: null,
   },
-  $dayjs: dayjs
+  $dayjs: dayjs,
+  // $calendar: calendar
 })

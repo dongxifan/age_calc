@@ -1,5 +1,7 @@
 // pages/result/result.js
 const app = getApp();
+import {calendar} from './../../utils/calendar'
+console.log(calendar);
 Page({
 
   /**
@@ -12,6 +14,7 @@ Page({
     belong: '',
     constellation: '',
     survivalDays: '',
+    nongDays: '',
     nextDesc: '',
   },
 
@@ -26,7 +29,6 @@ Page({
     // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
     eventChannel.on('acceptDataFromOpenerPage', function (data) {
       const {
-        time,
         currentDate: date
       } = data
       _this.setData({
@@ -35,7 +37,8 @@ Page({
         age2: _this.setAge2(date), // 虚岁
         belong: _this.setBelong(date), // 生肖
         constellation: _this.setConstellation(date), // 星座
-        survivalDays: _this.setSurvivalDays(time), // 生存天数
+        survivalDays: _this.setSurvivalDays(date), // 生存天数
+        nongDays: _this.setNongDays(date),
         nextDesc: _this.setNextDesc(date),
       })
     })
@@ -106,13 +109,22 @@ Page({
     return 28;
   },
   // 存活天数
-  setSurvivalDays(startTime) {
+  setSurvivalDays(date) {
+    const startTime = app.$dayjs(date).valueOf() 
     const nowTime = new Date().getTime()
     return Math.floor((nowTime - startTime) / 24 / 60 / 60 / 1000)
   },
+  // 农历生日
+  setNongDays(date){
+    const year = parseInt(date.split('-')[0])
+    const month = app.$dayjs(date).month() + 1
+    const day = app.$dayjs(date).date()
+    const cale = calendar.solar2lunar(year,month,day)
+    const {gzYear,IMonthCn,IDayCn,lunarDate} = cale
+    return `${gzYear}年 ${IMonthCn} ${IDayCn} (${lunarDate})`
+  },
   // 下次生日
   setNextDesc(val) {
-
     const month = app.$dayjs(val).month() + 1
     const day = app.$dayjs(val).date()
     const {
