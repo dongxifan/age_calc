@@ -1,5 +1,7 @@
 <view class="content">
-  <view class="bg"></view>
+  <view class="bg">
+    <image src='./../../static/bg.jpg' mode="widthFix" class="bg-image"></image>
+  </view>
   <view class="choose-title">请选择阳历生日</view>
   <view class="date" bindtap="showDate">{{currentDateText}}</view>
   <van-button type="primary" block class="start-btn" size="large" bindtap="showResult">年龄计算</van-button>

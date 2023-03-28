@@ -3,9 +3,14 @@
   height: 100%;
 }
 
+.content .bg-image{
+  width:100%;
+  opacity: 0.9;
+}
+
 .content .choose-title {
   margin: 0 auto;
-  margin-top: 40vh;
+  margin-top: 4vh;
   font-size: 36rpx;
   text-align: center;
 }
